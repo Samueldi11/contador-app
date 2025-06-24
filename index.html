@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador de Progreso</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Contador Diario">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(to right, #f0fdf4, #ecfeff);
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .contador-box {
+      margin: 2rem auto;
+      padding: 1rem;
+      border-radius: 1rem;
+      max-width: 400px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .titulo {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .contador {
+      font-size: 3rem;
+      margin: 1rem 0;
+      transition: all 0.3s ease-in-out;
+    }
+    .mensaje {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    button {
+      font-size: 1rem;
+      margin: 0.25rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    .sumar {
+      background-color: #10b981;
+      color: white;
+    }
+    .restar {
+      background-color: #f59e0b;
+      color: white;
+    }
+    .reiniciar {
+      background-color: #ef4444;
+      color: white;
+    }
+    .kallovik {
+      color: #10b981;
+    }
+    .jaroslaw {
+      color: #3b82f6;
+    }
+    .menu {
+      margin-top: 2rem;
+    }
+    .registro {
+      text-align: left;
+      max-width: 500px;
+      margin: 1rem auto;
+      background-color: #f9fafb;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .progreso {
+      margin-top: 0.5rem;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+      height: 1rem;
+      width: 100%;
+    }
+    .progreso-barra {
+      height: 100%;
+      transition: width 0.4s ease;
+    }
+  </style>
+</head>
+<body>
+  <h1>Contador Diario</h1>
+
+  <!-- Aquí va el contenido dinámico del contador -->
+
+  <audio id="beep" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('Service Worker registrado ✅'));
+    }
+  </script>
+</body>
+</html>
