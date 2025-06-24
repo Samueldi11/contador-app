@@ -96,12 +96,79 @@
 <body>
   <h1>Contador Diario</h1>
 
-  <!-- Aquí va el contenido dinámico del contador -->
+  <div class="contador-box">
+    <div class="titulo kallovik">Kallovik</div>
+    <div id="kallovik-contador" class="contador">0</div>
+    <button class="sumar" onclick="sumar('kallovik')">+1</button>
+    <button class="restar" onclick="restar('kallovik')">-1</button>
+    <button class="reiniciar" onclick="reiniciar('kallovik')">Reiniciar</button>
+    <div class="progreso">
+      <div id="kallovik-barra" class="progreso-barra" style="background-color: #10b981; width: 0%"></div>
+    </div>
+  </div>
+
+  <div class="contador-box">
+    <div class="titulo jaroslaw">Jaroslaw</div>
+    <div id="jaroslaw-contador" class="contador">0</div>
+    <button class="sumar" onclick="sumar('jaroslaw')">+1</button>
+    <button class="restar" onclick="restar('jaroslaw')">-1</button>
+    <button class="reiniciar" onclick="reiniciar('jaroslaw')">Reiniciar</button>
+    <div class="progreso">
+      <div id="jaroslaw-barra" class="progreso-barra" style="background-color: #3b82f6; width: 0%"></div>
+    </div>
+  </div>
+
+  <div class="menu">
+    <button onclick="exportarComoImagen()">📸 Exportar Progreso</button>
+  </div>
 
   <audio id="beep" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script>
+    const metas = { kallovik: 10, jaroslaw: 10 };
+    const progreso = { kallovik: 0, jaroslaw: 0 };
+
+    function actualizarVista(id) {
+      document.getElementById(`${id}-contador`).textContent = progreso[id];
+      const porcentaje = Math.min((progreso[id] / metas[id]) * 100, 100);
+      document.getElementById(`${id}-barra`).style.width = porcentaje + '%';
+    }
+
+    function sumar(id) {
+      progreso[id]++;
+      actualizarVista(id);
+      document.getElementById("beep").play();
+    }
+
+    function restar(id) {
+      progreso[id] = Math.max(0, progreso[id] - 1);
+      actualizarVista(id);
+    }
+
+    function reiniciar(id) {
+      progreso[id] = 0;
+      actualizarVista(id);
+    }
+
+    function exportarComoImagen() {
+      html2canvas(document.body).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'progreso.jpg';
+        link.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+        link.click();
+      });
+    }
+
+    actualizarVista('kallovik');
+    actualizarVista('jaroslaw');
+
     if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('Service Worker registrado ✅'));
+    }
+  </script>
+</body>
+</html>
       navigator.serviceWorker.register('sw.js')
         .then(() => console.log('Service Worker registrado ✅'));
     }
