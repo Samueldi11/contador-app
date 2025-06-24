@@ -1,18 +1,15 @@
-self.addEventListener('install', e => {
+self.addEventListener("install", function (e) {
   e.waitUntil(
-    caches.open('contador-cache').then(cache => {
-      return cache.addAll([
-        './',
-        './index.html',
-        './manifest.json',
-        './icon.png'
-      ]);
+    caches.open("contador-store").then(function (cache) {
+      return cache.addAll(["index.html", "manifest.json", "icon.png"]);
     })
   );
 });
 
-self.addEventListener('fetch', e => {
+self.addEventListener("fetch", function (e) {
   e.respondWith(
-    caches.match(e.request).then(response => response || fetch(e.request))
+    caches.match(e.request).then(function (response) {
+      return response || fetch(e.request);
+    })
   );
 });
